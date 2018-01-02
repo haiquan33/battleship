@@ -1,0 +1,61 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+
+.Header{
+  width: 100%;
+  background: #2868B1;
+  height: 50px;
+  font-family: Aircona;
+  font-size: 30px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+}
+.MainPage{
+  width: 100%
+}
+.RoomList{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  text-align: left;
+  padding : 10px 0px 0px 20px;
+  justify-content: flex-start;
+  font-family: Aircona;
+  color: black;
+  font-size: 25px;
+}
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@font-face {
+  font-family: 'Aircona';
+  src:url('./UTM Aircona.ttf') format('truetype');
+  
+}

@@ -1,0 +1,17 @@
+.boardContainer{
+    display: grid;
+    grid-template-columns: repeat(6,50px);
+    grid-template-rows: repeat(6,50px); 
+    justify-content:center;
+}
+.cell:hover{
+    background: yellow;
+}
+
+.cell:active{
+    background: yellow;
+}
+.cell{
+    text-align: center;
+  
+}
