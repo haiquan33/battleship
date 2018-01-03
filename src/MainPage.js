@@ -10,6 +10,7 @@ class MainPage extends Component {
         super(props);
         this.state = {
             isRoomJoined: false,
+            isRoomOwner:false,
             roomList:[],
             currentRoom:''
         }
@@ -23,7 +24,7 @@ class MainPage extends Component {
  
     CreateRoom() {
         ClientCreateRoom(this.props.username);
-        this.setState({ isRoomJoined: true,currentRoom:this.props.username })
+        this.setState({ isRoomJoined: true,currentRoom:this.props.username,isRoomOwner:true })
     }
 
     JoinRoom(roomName){
@@ -33,7 +34,7 @@ class MainPage extends Component {
     }
     
     render() {
-       const body=this.state.isRoomJoined?<Room/>: <RoomList JoinRoom={this.JoinRoom} roomList={this.state.roomList}/>;
+       const body=this.state.isRoomJoined?<Room isRoomOwner={this.state.isRoomOwner} roomList={this.state.roomList} currentRoom={this.state.currentRoom} />: <RoomList JoinRoom={this.JoinRoom} roomList={this.state.roomList}/>;
         return (
             <div className="MainPage">
                 <div className="Header">ShipBattle</div>

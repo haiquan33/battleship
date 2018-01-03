@@ -28,4 +28,11 @@ function ClientJoinRoom(roomName){
   
 }
 
-export { subscribeToTimer,ClientLogin,ClientGetRoom,ClientCreateRoom,ClientJoinRoom };
+
+function ClientReady2Play(){
+    
+    socket.emit('client-ready-2-play');
+  
+}
+
+export { subscribeToTimer,ClientLogin,ClientGetRoom,ClientCreateRoom,ClientJoinRoom,ClientReady2Play };

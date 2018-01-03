@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Room.css'
+import {ClientReady2Play} from './api/api'
 export default class Room extends Component {
     constructor(props) {
         super(props);
@@ -7,6 +8,7 @@ export default class Room extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.onCellHover = this.onCellHover.bind(this);
         this.onCellLeave = this.onCellLeave.bind(this);
+        this.ready2Play=this.ready2Play.bind(this);
         var cellColor = [];
         var cellMarked=[];
         for (var i = 0; i < 6; i++) {
@@ -28,6 +30,7 @@ export default class Room extends Component {
             boardSize: 6,
             cellColor,
             cellMarked,
+            isUserReady2Play:false,
             isPlaying: false,
             isShipHorizon: true,
             pickingShipCell: 4,
@@ -39,7 +42,12 @@ export default class Room extends Component {
     }
 
 
+    ready2Play(){
+            ClientReady2Play();
+    }
+
     onCellHover(posx, posy) {
+        if (this.state.isUserReady2Play) return;
         var cellColor = this.state.cellColor;
         var cellMarked=this.state.cellMarked;
         if (this.state.isShipHorizon) {
@@ -57,6 +65,7 @@ export default class Room extends Component {
     }
 
     onCellLeave(posx, posy) {
+        if (this.state.isUserReady2Play) return;
         var cellColor = this.state.cellColor;
         var cellMarked=this.state.cellMarked;
         if (this.state.isShipHorizon) {
@@ -73,6 +82,9 @@ export default class Room extends Component {
     }
 
     handleClick(posx, posy) {
+
+        if (this.state.isUserReady2Play) return;
+
         var cellColor = this.state.cellColor;
         var cellMarked=this.state.cellMarked;
         var shipLeft=this.state.shipLeft;
@@ -108,7 +120,10 @@ export default class Room extends Component {
             if (this.state.pickingShipCell==3)
             this.setState({ cellColor,cellMarked,shipLeft,pickingShipCell:1 });
             if (this.state.pickingShipCell==1)
-            this.setState({ cellColor,cellMarked,shipLeft,pickingShipCell:1,canPlaceMore:false });
+            {
+                this.setState({ cellColor,cellMarked,shipLeft,pickingShipCell:1,canPlaceMore:false,isUserReady2Play:true });
+                this.ready2Play();
+            }
         }
         else
         this.setState({ cellColor,cellMarked,shipLeft });
@@ -117,6 +132,9 @@ export default class Room extends Component {
     render() {
         var cells = [];
 
+        var playButton=this.props.isRoomOwner?<div style={styles.playButton}>Chơi</div>:null;
+
+        
 
 
         for (let i = 0; i < 6; i++) {
@@ -137,8 +155,17 @@ export default class Room extends Component {
 
         return (
             <div>
+                {playButton}
                 {board}
             </div>
         )
+    }
+}
+
+const styles={
+    playButton:{
+        width:'100px',
+        heigh:'50px',
+        background:'blue',
     }
 }
